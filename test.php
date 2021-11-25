@@ -1,7 +1,5 @@
-<!DOCTYPE HTML>
-<html>
 <?php
-$servername = "amusemgadmin.mysql.db";
+ $servername = "amusemgadmin.mysql.db";
 
 // REPLACE with your Database name
 $dbname = "amusemgadmin";
@@ -17,7 +15,7 @@ if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);
 }
 $sql = "SELECT id, sensor, location, tempin, tempout, tempext, humidxt, reading_time FROM SensorData ORDER BY id DESC";
- if ($result = $conn->query($sql)) {
+if ($result = $conn->query($sql)) {
 while ($row = $result->fetch_assoc()) {
 $row_id = $row["id"];
 $row_sensor = $row["sensor"];
@@ -26,25 +24,26 @@ $row_tempin = $row["tempin"];
 $row_tempout = $row["tempout"];
 $row_tempext = $row["tempext"];
 $row_humidxt = $row["humidxt"];
-$row_reading_time = $row["reading_time"];
+$row_reading_time = $row["reading_time"]
  $dataPoints = array(
- 	array("x" => 1451586600000 , "y" => array(30.840000, 27.480000)),
-	array("x" => 1454265000000 , "y" => array(29.610001, 27.100000)),
-	array("x" => 1456770600000 , "y" => array(32.049999, 29.309999)),
-	array("x" => 1459449000000 , "y" => array(32.020000, 30.309999)),
-	array("x" => 1462041000000 , "y" => array(30.990000, 29.059999)),
-	array("x" => 1464719400000 , "y" => array(31.500000, 29.170000)),
-	array("x" => 1467311400000 , "y" => array(33.000000, 31.080000)),
-	array("x" => 1469989800000 , "y" => array(31.570000, 31.000000)),
-	array("x" => 1472668200000 , "y" => array(31.450001, 29.400000)),
-	array("x" => 1475260200000 , "y" => array(29.750000, 28.330000)),
-	array("x" => 1477938600000 , "y" => array(31.490000, 28.190001)),
-	array("x" => 1480530600000 , "y" => array(32.380001, 30.620001))
+    array("x" => 1451586600000 , "y" => array(30.840000, 27.480000)),
+    array("x" => 1454265000000 , "y" => array(29.610001, 27.100000)),
+    array("x" => 1456770600000 , "y" => array(32.049999, 29.309999)),
+    array("x" => 1459449000000 , "y" => array(32.020000, 30.309999)),
+    array("x" => 1462041000000 , "y" => array(30.990000, 29.059999)),
+    array("x" => 1464719400000 , "y" => array(31.500000, 29.170000)),
+    array("x" => 1467311400000 , "y" => array(33.000000, 31.080000)),
+    array("x" => 1469989800000 , "y" => array(31.570000, 31.000000)),
+    array("x" => 1472668200000 , "y" => array(31.450001, 29.400000)),
+    array("x" => 1475260200000 , "y" => array(29.750000, 28.330000)),
+    array("x" => 1477938600000 , "y" => array(31.490000, 28.190001)),
+    array("x" => 1480530600000 , "y" => array(32.380001, 30.620001))
  );
  
-
-
-	<head>
+?>
+<!DOCTYPE HTML>
+<html>
+    <head>
         <meta charset="utf-8">
         <title>Gestionnaire Patinoire</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -255,7 +254,7 @@ $row_reading_time = $row["reading_time"];
                                             </div>
                                         </div>
 
-                                        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                                        <div id="chartContainer1" style="height: 370px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
                                         </div>
 
@@ -409,37 +408,37 @@ $row_reading_time = $row["reading_time"];
         <script src="assets/js/pages/demo.dashboard-crm.js"></script>
         <!-- end demo js-->
     </body>
-</html>	
+</html> 
 <head>
 <script>
 window.onload = function () {
  
-var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-	theme: "light2",
-	title:{
-		text: "Evolution de la Température"
-	},
-	subtitles: [{
-		text: "High and Low Prices - 2016"
-	}],
-	axisX: {
-		valueFormatString: "MMM",
-		intervalType: "month",
-		interval: 1
-	},
-	axisY: {
-		title: "Stock Price (in USD)",
-		prefix: "$"
-	},
-	data: [{
-		type: "rangeSplineArea",
-		xValueType: "dateTime",
-		xValueFormatString: "MMMM",
-		yValueFormatString: "$#,##0.00",
-		toolTipContent: "{x}<br><b>High:</b> {y[0]}<br><b>Low:</b> {y[0]}",
-		dataPoints: <?php echo json_encode($dataPoints); ?>
-	}]
+var chart = new CanvasJS.Chart("chartContainer1", {
+    animationEnabled: true,
+    theme: "light2",
+    title:{
+        text: "Evolution de la Température"
+    },
+    subtitles: [{
+        text: "High and Low Prices - 2016"
+    }],
+    axisX: {
+        valueFormatString: "MMM",
+        intervalType: "month",
+        interval: 1
+    },
+    axisY: {
+        title: "Stock Price (in USD)",
+        prefix: "$"
+    },
+    data: [{
+        type: "rangeSplineArea",
+        xValueType: "dateTime",
+        xValueFormatString: "MMMM",
+        yValueFormatString: "$#,##0.00",
+        toolTipContent: "{x}<br><b>High:</b> {y[0]}<br><b>Low:</b> {y[0]}",
+        dataPoints: <?php echo json_encode($dataPoints); ?>
+    }]
 });
  
 chart.render();
@@ -450,6 +449,4 @@ chart.render();
 <body>
 
 </body>
-$conn->close();
-?>
-</html>
+<html>
