@@ -1,5 +1,32 @@
+<!DOCTYPE HTML>
+<html>
 <?php
- 
+$servername = "amusemgadmin.mysql.db";
+
+// REPLACE with your Database name
+$dbname = "amusemgadmin";
+// REPLACE with Database user
+$username = "amusemgadmin";
+// REPLACE with Database user password
+$password = "EdwardVictor2504";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+die("Connection failed: " . $conn->connect_error);
+}
+$sql = "SELECT id, sensor, location, tempin, tempout, tempext, humidxt, reading_time FROM SensorData ORDER BY id DESC";
+ if ($result = $conn->query($sql)) {
+while ($row = $result->fetch_assoc()) {
+$row_id = $row["id"];
+$row_sensor = $row["sensor"];
+$row_location = $row["location"];
+$row_tempin = $row["tempin"];
+$row_tempout = $row["tempout"];
+$row_tempext = $row["tempext"];
+$row_humidxt = $row["humidxt"];
+$row_reading_time = $row["reading_time"];
  $dataPoints = array(
  	array("x" => 1451586600000 , "y" => array(30.840000, 27.480000)),
 	array("x" => 1454265000000 , "y" => array(29.610001, 27.100000)),
@@ -15,9 +42,8 @@
 	array("x" => 1480530600000 , "y" => array(32.380001, 30.620001))
  );
  
-?>
-<!DOCTYPE HTML>
-<html>
+
+
 	<head>
         <meta charset="utf-8">
         <title>Gestionnaire Patinoire</title>
@@ -424,4 +450,6 @@ chart.render();
 <body>
 
 </body>
+$conn->close();
+?>
 </html>
